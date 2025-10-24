@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>랜덤 추천기</title>
+<style>
+body {
+  background-color: #f2f2f2;
+  font-family: Arial;
+  text-align: center;
+  margin-top: 50px;
+}
+input, button {
+  padding: 8px;
+  margin: 5px;
+}
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: blue;
+}
+</style>
+</head>
+<body>
+
+<h2>랜덤 추천기 🎲</h2>
+<p>원하는 항목을 입력하고 추가하세요!</p>
+
+<input type="text" id="itemInput" placeholder="예: 치킨, 영화보기">
+<button onclick="addItem()">추가</button>
+
+<div id="itemList"></div>
+
+<hr>
+
+<button onclick="pickRandom()">랜덤 추천!</button>
+
+<div id="result">결과가 여기에 나옵니다.</div>
+
+<script>
+let items = [];
+
+function addItem() {
+  const input = document.getElementById('itemInput');
+  const value = input.value.trim();
+  if (value === '') {
+    alert('항목을 입력하세요!');
+    return;
+  }
+  items.push(value);
+  input.value = '';
+  showItems();
+}
+
+function showItems() {
+  const listDiv = document.getElementById('itemList');
+  listDiv.innerHTML = "<b>항목 목록:</b><br>" + items.join(', ');
+}
+
+function pickRandom() {
+  if (items.length === 0) {
+    alert('항목이 없습니다. 추가해주세요!');
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * items.length);
+  const result = items[randomIndex];
+  document.getElementById('result').innerText = "추천: " + result;
+}
+</script>
+
+</body>
+</html>
